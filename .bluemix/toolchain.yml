@@ -31,6 +31,7 @@ services:
   repo:
     service_id: >
       $env.source_provider ? $env.source_provider : 'hostedgit'
+    #service_id: githubpublic
     parameters:
       repo_name: 'hello-containers-{{timestamp}}'
       repo_url: >
