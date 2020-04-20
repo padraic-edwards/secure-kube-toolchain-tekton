@@ -29,6 +29,8 @@ toolchain:
       $ref: "#/messages/template.gettingStarted"
 services:
   repo:
+    #service_id: >
+    #  $env.source_provider ? $env.source_provider : 'hostedgit'
     service_id: githubpublic
     parameters:
       repo_name: 'hello-containers-{{timestamp}}'
@@ -43,10 +45,13 @@ services:
       enable_traceability: true
       legal: true
   pipeline-repo:
-    service_id: > 
-      $env.pipelinetype === 'tekton' ? githubpublic : ''
+    #service_id: > 
+     # $env.pipelinetype === 'tekton' ? githubpublic : ''
+    service_id: githubpublic
     parameters:
-      repo_name: 'secure-kube-toolchain2-{{timestamp}}'
+      repo_name: > 
+        $env.pipelinetype === 'tekton' ? 'secure-kube-toolchain-tekton-{{timestamp}}' : ''
+      #repo_name: 'secure-kube-toolchain2-{{timestamp}}'
       repo_url: >
         $env.type === 'link' ?
           $env.app_repo : 'https://github.com/huayuenh/secure-kube-toolchain-tekton'
@@ -58,10 +63,13 @@ services:
       enable_traceability: false
       legal: true
   tekton-catalog-repo:
-    service_id: > 
-      $env.pipelinetype === 'tekton' ? githubpublic : ''
+    service_id: githubpublic
+    #  $env.pipelinetype === 'tekton' ? githubpublic : ''
+    #service_id: > 
     parameters:
-      repo_name: 'tekton-catalog-{{timestamp}}'
+      #repo_name: 'tekton-catalog-{{timestamp}}'
+      repo_name: > 
+        $env.pipelinetype === 'tekton' ? 'tekton-catalog-{{timestamp}}' : ''
       repo_url: >
         $env.type === 'link' ?
           $env.app_repo : 'https://github.com/open-toolchain/tekton-catalog'
@@ -73,10 +81,13 @@ services:
       enable_traceability: false
       legal: true
   tekton-temp-common-repo:
-    service_id: > 
-      $env.pipelinetype === 'tekton' ? githubpublic : ''
+    #service_id: > 
+      #$env.pipelinetype === 'tekton' ? githubpublic : ''
+    service_id: githubpublic
     parameters:
-      repo_name: 'common-tekton-temp-{{timestamp}}'
+      #repo_name: 'common-tekton-temp-{{timestamp}}'
+      repo_name: > 
+        $env.pipelinetype === 'tekton' ? 'common-tekton-temp-{{timestamp}}' : ''
       repo_url: >
         $env.type === 'link' ?
           $env.app_repo : 'https://github.com/huayuenh/common-tekton'
@@ -99,8 +110,10 @@ services:
       type: tekton
       configuration:
         content: 
-          $text: >
-            $env.pipelinetype === 'tekton' ? 'pipeline.yml' : 'pipeline.yml'
+          $text: pipeline.yml
+         # $text: pipeline_tekton.yml
+         # $text: >
+         #   $env.pipelinetype === 'tekton' ? 'pipeline.yml' : 'pipeline.yml'
         env:
           GIT_REPO: repo
           APP_NAME: '{{form.pipeline.parameters.app-name}}'
@@ -124,6 +137,7 @@ form:
   pipeline:
     parameters:
       app-name: '{{services.repo.parameters.repo_name}}'
+      #prod-cluster-namespace: prod
       prod-cluster-namespace: >
         $env.pipelinetype === 'tekton' ? 'default' : 'prod'
     schema:
