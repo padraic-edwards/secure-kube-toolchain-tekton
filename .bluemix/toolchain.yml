@@ -49,12 +49,10 @@ services:
      # $env.pipelinetype === 'tekton' ? githubpublic : ''
     service_id: githubpublic
     parameters:
-      repo_name: > 
-        $env.pipelinetype === 'tekton' ? 'secure-kube-toolchain-tekton-{{timestamp}}' : ''
-      #repo_name: 'secure-kube-toolchain2-{{timestamp}}'
+      repo_name: 'secure-kube-toolchain2-{{timestamp}}'
       repo_url: >
         $env.type === 'link' ?
-          $env.app_repo : 'https://github.com/huayuenh/secure-kube-toolchain-tekton'
+          $env.app_repo : $env.pipelinetype === 'tekton' ? 'https://github.com/huayuenh/secure-kube-toolchain-tekton' :''
       source_repo_url: >
         $env.type === 'fork' || $env.type === 'clone' ?
           $env.app_repo : 'https://github.com/huayuenh/secure-kube-toolchain-tekton'
@@ -67,12 +65,10 @@ services:
     #  $env.pipelinetype === 'tekton' ? githubpublic : ''
     #service_id: > 
     parameters:
-      #repo_name: 'tekton-catalog-{{timestamp}}'
-      repo_name: > 
-        $env.pipelinetype === 'tekton' ? 'tekton-catalog-{{timestamp}}' : ''
+      repo_name: 'tekton-catalog-{{timestamp}}'
       repo_url: >
         $env.type === 'link' ?
-          $env.app_repo : 'https://github.com/open-toolchain/tekton-catalog'
+          $env.app_repo : $env.pipelinetype === 'tekton' ? 'https://github.com/open-toolchain/tekton-catalog' :''
       source_repo_url: >
         $env.type === 'fork' || $env.type === 'clone' ?
           $env.app_repo : 'https://github.com/open-toolchain/tekton-catalog'
@@ -85,12 +81,10 @@ services:
       #$env.pipelinetype === 'tekton' ? githubpublic : ''
     service_id: githubpublic
     parameters:
-      #repo_name: 'common-tekton-temp-{{timestamp}}'
-      repo_name: > 
-        $env.pipelinetype === 'tekton' ? 'common-tekton-temp-{{timestamp}}' : ''
+      repo_name: 'common-tekton-temp-{{timestamp}}'
       repo_url: >
         $env.type === 'link' ?
-          $env.app_repo : 'https://github.com/huayuenh/common-tekton'
+          $env.app_repo : $env.pipelinetype === 'tekton' ? 'https://github.com/huayuenh/common-tekton' :''
       source_repo_url: >
         $env.type === 'fork' || $env.type === 'clone' ?
           $env.app_repo : 'https://github.com/huayuenh/common-tekton'
