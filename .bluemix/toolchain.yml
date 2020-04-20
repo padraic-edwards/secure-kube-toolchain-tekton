@@ -101,7 +101,7 @@ services:
         - tekton-catalog-repo
       name: '{{services.repo.parameters.repo_name}}'
       ui-pipeline: true
-      type: tekton
+      type: classic
       configuration:
         content: 
           $text: pipeline.yml
