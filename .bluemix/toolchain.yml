@@ -61,9 +61,9 @@ services:
       enable_traceability: false
       legal: true
   tekton-catalog-repo:
-    service_id: githubpublic
-    #  $env.pipelinetype === 'tekton' ? githubpublic : ''
-    #service_id: > 
+    #service_id: githubpublic
+    service_id: > 
+      $env.pipelinetype === 'tekton' ? githubpublic : ''
     parameters:
       repo_name: 'tekton-catalog-{{timestamp}}'
       repo_url: >
