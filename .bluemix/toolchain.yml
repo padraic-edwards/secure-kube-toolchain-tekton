@@ -51,7 +51,7 @@ services:
       repo_name: 'secure-kube-toolchain2-{{timestamp}}'
       repo_url: >
         $env.type === 'link' ?
-          $env.app_repo : $env.tekton === 'true' ? 'https://github.com/huayuenh/secure-kube-toolchain-tekton' : ''
+          $env.app_repo : 'https://github.com/huayuenh/secure-kube-toolchain-tekton'
       source_repo_url: >
         $env.type === 'fork' || $env.type === 'clone' ?
           $env.app_repo : 'https://github.com/huayuenh/secure-kube-toolchain-tekton'
@@ -60,7 +60,8 @@ services:
       enable_traceability: false
       legal: true
   tekton-catalog-repo:
-    service_id: githubpublic
+    service_id: > 
+      $env.tekton === 'true' ? githubpublic : ''
     parameters:
       repo_name: 'tekton-catalog-{{timestamp}}'
       repo_url: >
@@ -74,7 +75,8 @@ services:
       enable_traceability: false
       legal: true
   tekton-temp-common-repo:
-    service_id: githubpublic
+    service_id: > 
+      $env.tekton === 'true' ? githubpublic : ''
     parameters:
       repo_name: 'common-tekton-temp-{{timestamp}}'
       repo_url: >
