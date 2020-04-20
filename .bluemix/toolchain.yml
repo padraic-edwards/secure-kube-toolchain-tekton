@@ -132,6 +132,7 @@ form:
     parameters:
       app-name: '{{services.repo.parameters.repo_name}}'
       #prod-cluster-namespace: prod
-      prod-cluster-namespace: default
+      prod-cluster-namespace: >
+        $env.pipelinetype === 'tekton' ? 'default' : 'prod'
     schema:
       $ref: deploy.json
