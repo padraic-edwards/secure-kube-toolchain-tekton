@@ -107,8 +107,7 @@ services:
          # $text: pipeline.yml
          # $text: pipeline_tekton.yml
           $text: >
-            $env.pipelinetype === 'tekton' ? pipeline_tekton.yml : pipeline.yml
-          
+            $env.pipelinetype === 'tekton' ? 'pipeline_tekton.yml' : 'pipeline.yml'
         env:
           GIT_REPO: repo
           APP_NAME: '{{form.pipeline.parameters.app-name}}'
