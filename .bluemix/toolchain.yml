@@ -29,8 +29,6 @@ toolchain:
       $ref: "#/messages/template.gettingStarted"
 services:
   repo:
-    #service_id: >
-    #  $env.source_provider ? $env.source_provider : 'hostedgit'
     service_id: githubpublic
     parameters:
       repo_name: 'hello-containers-{{timestamp}}'
@@ -47,7 +45,6 @@ services:
   pipeline-repo:
     service_id: > 
       $env.pipelinetype === 'tekton' ? githubpublic : ''
-    #service_id: githubpublic
     parameters:
       repo_name: 'secure-kube-toolchain2-{{timestamp}}'
       repo_url: >
@@ -61,7 +58,6 @@ services:
       enable_traceability: false
       legal: true
   tekton-catalog-repo:
-    #service_id: githubpublic
     service_id: > 
       $env.pipelinetype === 'tekton' ? githubpublic : ''
     parameters:
@@ -79,7 +75,6 @@ services:
   tekton-temp-common-repo:
     service_id: > 
       $env.pipelinetype === 'tekton' ? githubpublic : ''
-    #service_id: githubpublic
     parameters:
       repo_name: 'common-tekton-temp-{{timestamp}}'
       repo_url: >
@@ -104,8 +99,6 @@ services:
       type: tekton
       configuration:
         content: 
-         # $text: pipeline.yml
-         # $text: pipeline_tekton.yml
           $text: >
             $env.pipelinetype === 'tekton' ? 'pipeline.yml' : 'pipeline.yml'
         env:
@@ -131,7 +124,6 @@ form:
   pipeline:
     parameters:
       app-name: '{{services.repo.parameters.repo_name}}'
-      #prod-cluster-namespace: prod
       prod-cluster-namespace: >
         $env.pipelinetype === 'tekton' ? 'default' : 'prod'
     schema:
