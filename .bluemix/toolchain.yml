@@ -63,7 +63,7 @@ services:
   tekton-catalog-repo:
     #service_id: githubpublic
     service_id: > 
-      $env.pipelinetype === 'tekton' ? githubpublic : ''
+      $env.source_provider === 'tekton' ? githubpublic : ''
     parameters:
       repo_name: 'tekton-catalog-{{timestamp}}'
       repo_url: >
