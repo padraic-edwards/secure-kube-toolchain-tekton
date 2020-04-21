@@ -14,13 +14,14 @@ template:
     - repo
     - pipeline-repo
     - tekton-catalog-repo
+    -  null
   info:
     git url: >
       "[" + $env.repository + "]" +
         "(" + $env.repository + ")"
     git branch: >
       "[" + $env.branch + "]" +
-        "(" + $env.repository +
+        "(" + $env.repository 
           "/tree/" + $env.branch + ")"
 toolchain:
   name: 'kube-toolchain-{{timestamp}}'
