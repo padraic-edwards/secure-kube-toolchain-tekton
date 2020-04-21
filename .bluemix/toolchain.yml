@@ -14,7 +14,7 @@ template:
     - repo
     - pipeline-repo
     - tekton-catalog-repo
-    -  null
+    -  ''
   info:
     git url: >
       "[" + $env.repository + "]" +
