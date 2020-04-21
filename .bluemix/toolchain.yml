@@ -13,7 +13,6 @@ template:
     - build
     - repo
     - pipeline-repo
-    - tekton-catalog-repo
   info:
     git url: >
       "[" + $env.repository + "]" +
@@ -63,7 +62,7 @@ services:
   tekton-catalog-repo:
     #service_id: githubpublic
     service_id: > 
-      $env.service_id === 'tekton' ? githubpublic : ' '
+      $env.service_id === 'tekton' ? githubpublic : ''
     parameters:
       repo_name: 'tekton-catalog-{{timestamp}}'
       repo_url: >
