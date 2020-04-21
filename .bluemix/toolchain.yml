@@ -12,12 +12,9 @@ template:
   required:
     - build
     - repo
-    - > 
-      $env.pipelinetype === 'tekton' ? pipeline-repo : ''
-    - > 
-      $env.pipelinetype === 'tekton' ? tekton-catalog-repo : ''
-    - > 
-      $env.pipelinetype === 'tekton' ? tekton-temp-common-repo : ''
+    - pipeline-repo
+    - tekton-catalog-repo
+    - tekton-temp-common-repo
   info:
     git url: >
       "[" + $env.repository + "]" +
@@ -110,8 +107,6 @@ services:
         $env.pipelinetype === 'tekton' ? 'tekton': 'classic'
       configuration:
         content: 
-         # $text: pipeline.yml
-         # $text: pipeline_tekton.yml
           $text: >
             $env.pipelinetype === 'tekton' ? 'pipeline_tekton.yml' : 'pipeline.yml'
         env:
