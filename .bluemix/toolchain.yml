@@ -69,7 +69,7 @@ services:
       repo_name: 'tekton-catalog-{{timestamp}}'
       repo_url: >
         $env.type === 'link' ?
-          $env.app_repo : $env.pipelinetype === 'tekton' ? 'https://github.com/open-toolchain/tekton-catalog' :''
+          $env.app_repo : 'https://github.com/open-toolchain/tekton-catalog'
       source_repo_url: >
         $env.type === 'fork' || $env.type === 'clone' ?
           $env.app_repo : 'https://github.com/open-toolchain/tekton-catalog'
