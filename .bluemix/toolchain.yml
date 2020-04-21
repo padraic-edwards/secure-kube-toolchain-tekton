@@ -32,7 +32,7 @@ services:
   repo:
     #service_id: >
     #  $env.source_provider ? $env.source_provider : 'hostedgit'
-    service_id: githubpublic
+    service_id: githubconsolidated
     parameters:
       repo_name: 'hello-containers-{{timestamp}}'
       repo_url: >
@@ -47,7 +47,7 @@ services:
       legal: true
   pipeline-repo:
     service_id: > 
-      $env.pipelinetype === 'tekton' ? 'githubpublic' : ''
+      $env.pipelinetype === 'tekton' ? 'githubconsolidated' : ''
     parameters:
       repo_name: 'secure-kube-toolchain-toolchain-{{timestamp}}'
       repo_url: >
@@ -62,7 +62,7 @@ services:
       legal: true
   tekton-catalog-repo:
     service_id: > 
-      $env.pipelinetype === 'tekton' ? 'githubpublic' : ''
+      $env.pipelinetype === 'tekton' ? 'githubconsolidated' : ''
     parameters:
       repo_name: 'tekton-catalog-{{timestamp}}'
       repo_url: >
@@ -77,7 +77,7 @@ services:
       legal: true
   tekton-temp-common-repo:
     service_id: > 
-      $env.pipelinetype === 'tekton' ? 'githubpublic' : ''
+      $env.pipelinetype === 'tekton' ? 'githubconsolidated' : ''
     parameters:
       repo_name: 'common-tekton-temp-{{timestamp}}'
       repo_url: >
