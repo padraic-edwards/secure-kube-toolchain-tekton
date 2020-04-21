@@ -114,9 +114,6 @@ services:
           PROD_CLUSTER_NAME: '{{form.pipeline.parameters.prod-cluster-name}}'
           PROD_CLUSTER_NAMESPACE: '{{form.pipeline.parameters.prod-cluster-namespace}}'
           APP_REPO_FULL: 'https://github.com/{{form.repo.parameters.owner_id}}/{{form.repo.parameters.repo_name}}'
-          PIPELINE_REPO: pipeline-repo
-          TEKTON_CATALOG_REPO: tekton-catalog-repo
-          TEKTON_TEMP_COMMON: tekton-temp-common-repo
           IMAGE_URL: 'us.icr.io/{{form.pipeline.parameters.registry-namespace}}/{{form.pipeline.parameters.app-name}}'
         execute: > 
           $env.pipelinetype === 'tekton' ? false : true
