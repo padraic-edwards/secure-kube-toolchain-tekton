@@ -12,6 +12,9 @@ template:
   required:
     - build
     - repo
+    - pipeline-repo
+    - tekton-catalog-repo
+    - tekton-temp-common-repo
   info:
     git url: >
       "[" + $env.repository + "]" +
