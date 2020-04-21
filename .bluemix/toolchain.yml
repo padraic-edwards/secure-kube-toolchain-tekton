@@ -50,7 +50,7 @@ services:
      # $env.pipelinetype === 'tekton' ? githubpublic : ''
     service_id: githubpublic
     parameters:
-      repo_name: 'secure-kube-toolchain2-{{timestamp}}'
+      repo_name: 'secure-kube-toolchain-toolchain-{{timestamp}}'
       repo_url: >
         $env.type === 'link' ?
           $env.app_repo : 'https://github.com/huayuenh/secure-kube-toolchain-tekton'
