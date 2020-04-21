@@ -12,6 +12,9 @@ template:
   required:
     - build
     - repo
+    - pipeline-repo
+    - tekton-catalog-repo
+    - tekton-temp-common-repo
   info:
     git url: >
       "[" + $env.repository + "]" +
@@ -27,6 +30,8 @@ toolchain:
       $ref: "#/messages/template.gettingStarted"
 services:
   repo:
+    #service_id: >
+    #  $env.source_provider ? $env.source_provider : 'hostedgit'
     service_id: githubpublic
     parameters:
       repo_name: 'hello-containers-{{timestamp}}'
@@ -41,8 +46,9 @@ services:
       enable_traceability: true
       legal: true
   pipeline-repo:
-    service_id: >
-      $env.pipelinetype === 'tekton' ? 'hostedgit' : ''
+    #service_id: > 
+     # $env.pipelinetype === 'tekton' ? githubpublic : ''
+    service_id: githubpublic
     parameters:
       repo_name: 'secure-kube-toolchain-toolchain-{{timestamp}}'
       repo_url: >
@@ -56,8 +62,9 @@ services:
       enable_traceability: false
       legal: true
   tekton-catalog-repo:
-    service_id: >
-      $env.pipelinetype === 'tekton' ? 'hostedgit' : ''
+    service_id: githubpublic
+    #service_id: > 
+    #  $env.pipelinetype === 'tekton' ? githubpublic : ''
     parameters:
       repo_name: 'tekton-catalog-{{timestamp}}'
       repo_url: >
@@ -71,8 +78,9 @@ services:
       enable_traceability: false
       legal: true
   tekton-temp-common-repo:
-    service_id: >
-      $env.pipelinetype === 'tekton' ? 'hostedgit' : ''
+    #service_id: > 
+      #$env.pipelinetype === 'tekton' ? githubpublic : ''
+    service_id: githubpublic
     parameters:
       repo_name: 'common-tekton-temp-{{timestamp}}'
       repo_url: >
@@ -99,8 +107,6 @@ services:
         $env.pipelinetype === 'tekton' ? 'tekton': 'classic'
       configuration:
         content: 
-         # $text: pipeline.yml
-         # $text: pipeline_tekton.yml
           $text: >
             $env.pipelinetype === 'tekton' ? 'pipeline_tekton.yml' : 'pipeline.yml'
         env:
