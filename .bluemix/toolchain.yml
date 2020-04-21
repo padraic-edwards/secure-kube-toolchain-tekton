@@ -98,6 +98,9 @@ services:
     parameters:
       services:
         - repo
+        - pipeline-repo
+        - tekton-catalog-repo
+        - tekton-temp-common-repo
       name: '{{services.repo.parameters.repo_name}}'
       ui-pipeline: true
       type: > 
