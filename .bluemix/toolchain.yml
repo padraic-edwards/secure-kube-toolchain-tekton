@@ -20,6 +20,7 @@ template:
       "[" + $env.branch + "]" +
         "(" + $env.repository 
           "/tree/" + $env.branch + ")"
+    tektonEnabled: true
 toolchain:
   name: 'kube-toolchain-{{timestamp}}'
   template:
